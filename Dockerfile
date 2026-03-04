@@ -13,7 +13,10 @@ WORKDIR /app
 # Install system dependencies for whisper (ffmpeg)
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# Install CPU-only PyTorch first (much smaller than default CUDA version)
+RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+# Install remaining Python dependencies
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
