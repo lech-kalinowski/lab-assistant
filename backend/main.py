@@ -5,7 +5,6 @@ import tempfile
 from datetime import datetime
 from pathlib import Path
 
-from faster_whisper import WhisperModel
 from fastapi import FastAPI, Request, UploadFile, File, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
@@ -45,6 +44,7 @@ whisper_model = None
 def get_whisper_model():
     global whisper_model
     if whisper_model is None:
+        from faster_whisper import WhisperModel
         whisper_model = WhisperModel("base", device="cpu", compute_type="int8")
     return whisper_model
 

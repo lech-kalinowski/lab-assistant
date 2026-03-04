@@ -7,26 +7,16 @@ COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Python backend + serve static files
-FROM python:3.11-slim
+FROM python:3.11
 WORKDIR /app
 
-# Install system dependencies for whisper (ffmpeg)
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
 COPY backend/ ./
-
-# Pre-download Whisper model during build so startup is fast
-RUN python -c "from faster_whisper import WhisperModel; WhisperModel('base', device='cpu', compute_type='int8')"
-
-# Copy built frontend from stage 1
 COPY --from=frontend-build /app/frontend/dist ./frontend_dist
 
-ENV PORT=8000
 EXPOSE 8000
-
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT}
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
