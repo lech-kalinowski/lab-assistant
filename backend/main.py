@@ -17,7 +17,7 @@ from extractor import extract_measurements
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="ReyBan Meta Lab", version="1.0.0")
+app = FastAPI(title="Lab Assistant", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,

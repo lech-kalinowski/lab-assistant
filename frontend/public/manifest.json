@@ -1,6 +1,6 @@
 {
-  "name": "ReyBan Meta Lab",
-  "short_name": "MetaLab",
+  "name": "Lab Assistant",
+  "short_name": "Lab Assistant",
   "description": "Voice-controlled lab measurements recorder for Ray-Ban Meta glasses",
   "start_url": "/",
   "display": "standalone",

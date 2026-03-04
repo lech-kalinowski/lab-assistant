@@ -25,7 +25,7 @@ export default function App() {
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-xl font-bold text-gray-900">
-            ReyBan Meta Lab
+            Lab Assistant
           </h1>
           <nav className="flex gap-1">
             {TABS.map((t) => (
