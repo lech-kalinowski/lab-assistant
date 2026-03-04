@@ -7,15 +7,17 @@ import path from 'path'
 const certDir = path.resolve(__dirname, '../certs')
 const certExists = fs.existsSync(path.join(certDir, 'localhost+2.pem'))
 
+const httpsConfig = certExists
+  ? {
+      key: fs.readFileSync(path.join(certDir, 'localhost+2-key.pem')),
+      cert: fs.readFileSync(path.join(certDir, 'localhost+2.pem')),
+    }
+  : undefined
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     host: '0.0.0.0',
-    ...(certExists && {
-      https: {
-        key: fs.readFileSync(path.join(certDir, 'localhost+2-key.pem')),
-        cert: fs.readFileSync(path.join(certDir, 'localhost+2.pem')),
-      },
-    }),
+    ...(httpsConfig && { https: httpsConfig }),
   },
 })
