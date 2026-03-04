@@ -76,15 +76,13 @@ Lab Assistant is designed for hands-free use with Ray-Ban Meta smart glasses. On
 
 ### Voice Commands
 
+For voice commands to work, you'll need a short custom domain (e.g. `lab.yourdomain.com`). You can add a custom domain in Railway under **Settings > Networking > Custom Domain**. Alternatively, use a free URL shortener.
+
 **Open the app:**
-> "Hey Meta, open lab-assistant-production.up.railway.app"
+> "Hey Meta, open lab dot yourdomain dot com"
 
-The glasses will open the URL in the connected phone's browser.
-
-**Start recording a measurement:**
-> "Hey Meta, open lab-assistant-production.up.railway.app?action=record"
-
-This opens the app and can trigger recording automatically (if microphone permission was previously granted).
+**Start recording:**
+> "Hey Meta, open lab dot yourdomain dot com slash record"
 
 ### Typical Workflow
 
