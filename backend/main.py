@@ -5,7 +5,7 @@ import tempfile
 from datetime import datetime
 from pathlib import Path
 
-import whisper
+from faster_whisper import WhisperModel
 from fastapi import FastAPI, Request, UploadFile, File, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
@@ -40,7 +40,7 @@ whisper_model = None
 def get_whisper_model():
     global whisper_model
     if whisper_model is None:
-        whisper_model = whisper.load_model("base")
+        whisper_model = WhisperModel("base", device="cpu", compute_type="int8")
     return whisper_model
 
 
@@ -62,11 +62,10 @@ async def upload_audio(file: UploadFile = File(...), db: Session = Depends(get_d
     try:
         # Transcribe with Whisper
         model = get_whisper_model()
-        result = model.transcribe(tmp_path)
-        transcript = result.get("text", "")
-        duration = None
-        if result.get("segments"):
-            duration = result["segments"][-1].get("end")
+        segments, info = model.transcribe(tmp_path)
+        segments_list = list(segments)
+        transcript = " ".join(seg.text.strip() for seg in segments_list)
+        duration = segments_list[-1].end if segments_list else None
 
         # Create recording record
         recording = Recording(
