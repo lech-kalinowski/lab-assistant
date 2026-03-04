@@ -238,12 +238,15 @@ def delete_recording(recording_id: int, db: Session = Depends(get_db)):
 FRONTEND_DIR = Path(__file__).parent / "frontend_dist"
 
 if FRONTEND_DIR.is_dir():
-    app.mount("/assets", StaticFiles(directory=FRONTEND_DIR / "assets"), name="static-assets")
+    print(f"[startup] Serving frontend from {FRONTEND_DIR}")
+    print(f"[startup] Frontend files: {[str(p.relative_to(FRONTEND_DIR)) for p in FRONTEND_DIR.rglob('*') if p.is_file()]}")
 
     @app.get("/{full_path:path}")
     async def serve_spa(request: Request, full_path: str):
-        """Serve frontend files, falling back to index.html for SPA routing."""
-        file_path = FRONTEND_DIR / full_path
-        if full_path and file_path.is_file():
-            return FileResponse(file_path)
+        """Serve static files, falling back to index.html for SPA routing."""
+        if full_path:
+            file_path = FRONTEND_DIR / full_path
+            # Prevent path traversal
+            if file_path.resolve().is_relative_to(FRONTEND_DIR.resolve()) and file_path.is_file():
+                return FileResponse(file_path)
         return FileResponse(FRONTEND_DIR / "index.html")
