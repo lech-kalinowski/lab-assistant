@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Lab Assistant</string>
+    <string name="title_activity_main">Lab Assistant</string>
+    <string name="package_name">com.reybanmetalab.app</string>
+    <string name="custom_url_scheme">labassistant</string>
+    <string-array name="assistant_start_recording_queries">
+        <item>start recording</item>
+        <item>record measurements</item>
+        <item>begin lab recording</item>
+    </string-array>
+    <string-array name="assistant_stop_recording_queries">
+        <item>stop recording</item>
+        <item>finish recording</item>
+        <item>end lab recording</item>
+    </string-array>
+    <string-array name="assistant_open_dashboard_queries">
+        <item>open dashboard</item>
+        <item>show recordings</item>
+        <item>open lab dashboard</item>
+    </string-array>
+    <string-array name="assistant_open_setup_queries">
+        <item>open hands free setup</item>
+        <item>open assistant setup</item>
+        <item>show headset setup</item>
+    </string-array>
+</resources>

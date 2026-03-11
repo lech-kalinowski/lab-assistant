@@ -1,0 +1,47 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="84" y1="52" x2="611" y2="662" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14263B"/>
+      <stop offset="0.5" stop-color="#173E4B"/>
+      <stop offset="1" stop-color="#E88A5D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 358) rotate(90) scale(222)">
+      <stop stop-color="#B5FFE2"/>
+      <stop offset="1" stop-color="#B5FFE2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="720" height="720" rx="44" fill="url(#bg)"/>
+  <circle cx="360" cy="360" r="220" fill="url(#glow)"/>
+
+  <g opacity="0.22">
+    <circle cx="147" cy="163" r="10" fill="#FDF5D1"/>
+    <circle cx="584" cy="203" r="10" fill="#FDF5D1"/>
+    <circle cx="562" cy="537" r="10" fill="#FDF5D1"/>
+    <circle cx="183" cy="565" r="10" fill="#FDF5D1"/>
+  </g>
+
+  <circle cx="360" cy="360" r="164" stroke="#B5FFE2" stroke-width="4" stroke-dasharray="14 18" opacity="0.36"/>
+  <circle cx="360" cy="360" r="234" stroke="#FFE0A5" stroke-width="4" stroke-dasharray="14 18" opacity="0.24"/>
+
+  <g>
+    <circle cx="360" cy="360" r="96" fill="#0F1A2D" stroke="#C5FFF0" stroke-width="8"/>
+    <path d="M360 294C388.719 294 412 317.281 412 346V375C412 403.719 388.719 427 360 427C331.281 427 308 403.719 308 375V346C308 317.281 331.281 294 360 294Z" fill="#7AEAD5"/>
+    <path d="M332 446C339.98 454.636 349.594 459 360 459C370.406 459 380.02 454.636 388 446" stroke="#FFE19D" stroke-width="12" stroke-linecap="round"/>
+    <path d="M360 427V474" stroke="#FFE19D" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <g>
+    <path d="M219 265C181.962 300.853 181.962 359.147 219 395" stroke="#FFE19D" stroke-width="18" stroke-linecap="round"/>
+    <path d="M495 265C532.038 300.853 532.038 359.147 495 395" stroke="#FFE19D" stroke-width="18" stroke-linecap="round"/>
+    <path d="M171 225C121.635 275.317 121.635 384.683 171 435" stroke="#7EEFD8" stroke-width="16" stroke-linecap="round" opacity="0.88"/>
+    <path d="M543 225C592.365 275.317 592.365 384.683 543 435" stroke="#7EEFD8" stroke-width="16" stroke-linecap="round" opacity="0.88"/>
+  </g>
+
+  <g>
+    <circle cx="360" cy="126" r="16" fill="#7EEFD8"/>
+    <circle cx="595" cy="360" r="16" fill="#FFE19D"/>
+    <circle cx="360" cy="594" r="16" fill="#7EEFD8"/>
+    <circle cx="125" cy="360" r="16" fill="#FFE19D"/>
+  </g>
+</svg>

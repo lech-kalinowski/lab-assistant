@@ -1,0 +1,6 @@
+{
+  "appId": "com.reybanmetalab.app",
+  "appName": "Lab Assistant",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

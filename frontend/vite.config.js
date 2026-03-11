@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const certDir = path.resolve(__dirname, '../certs')
 const certExists = fs.existsSync(path.join(certDir, 'localhost+2.pem'))
 

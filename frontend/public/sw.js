@@ -1,5 +1,23 @@
-const CACHE_NAME = "metalab-v1";
-const PRECACHE_URLS = ["/", "/index.html"];
+const CACHE_NAME = "metalab-v2";
+const APP_SHELL_URL = "/index.html";
+const PRECACHE_URLS = ["/", APP_SHELL_URL];
+
+function createOfflineResponse(request) {
+  const isJsonRequest =
+    request.headers.get("accept")?.includes("application/json") ||
+    request.url.includes("/api/");
+
+  return new Response(
+    isJsonRequest ? JSON.stringify({ error: "Offline" }) : "Offline",
+    {
+      status: 503,
+      statusText: "Service Unavailable",
+      headers: {
+        "Content-Type": isJsonRequest ? "application/json" : "text/plain; charset=utf-8",
+      },
+    }
+  );
+}
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -18,17 +36,36 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  // Network-first strategy: try network, fall back to cache
+  if (event.request.method !== "GET") {
+    return;
+  }
+
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Cache successful GET responses
-        if (event.request.method === "GET" && response.status === 200) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+    (async () => {
+      try {
+        const response = await fetch(event.request);
+
+        if (response.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(event.request, response.clone());
         }
+
         return response;
-      })
-      .catch(() => caches.match(event.request))
+      } catch {
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        if (event.request.mode === "navigate") {
+          const appShell = await caches.match(APP_SHELL_URL);
+          if (appShell) {
+            return appShell;
+          }
+        }
+
+        return createOfflineResponse(event.request);
+      }
+    })()
   );
 });

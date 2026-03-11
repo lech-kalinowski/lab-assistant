@@ -1,20 +1,49 @@
 import { useState, useEffect } from "react";
 import { getMeasurements, getExportCsvUrl } from "../api";
 
+const INITIAL_FILTERS = { unit: "", minValue: "", maxValue: "" };
+
 export default function MeasurementsPage() {
   const [measurements, setMeasurements] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({ unit: "", minValue: "", maxValue: "" });
+  const [filters, setFilters] = useState(INITIAL_FILTERS);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    loadMeasurements();
+    let cancelled = false;
+
+    async function loadInitialMeasurements() {
+      try {
+        setError(null);
+        const data = await getMeasurements(INITIAL_FILTERS);
+        if (!cancelled) {
+          setMeasurements(data);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message || "Failed to load measurements");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadInitialMeasurements();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  async function loadMeasurements() {
+  async function loadMeasurements(nextFilters = filters) {
     setLoading(true);
+    setError(null);
     try {
-      const data = await getMeasurements(filters);
+      const data = await getMeasurements(nextFilters);
       setMeasurements(data);
+    } catch (err) {
+      setError(err.message || "Failed to load measurements");
     } finally {
       setLoading(false);
     }
@@ -26,11 +55,8 @@ export default function MeasurementsPage() {
 
   function handleSearch(e) {
     e.preventDefault();
-    loadMeasurements();
+    loadMeasurements(filters);
   }
-
-  // Collect unique units for dropdown
-  const uniqueUnits = [...new Set(measurements.map((m) => m.unit))].sort();
 
   return (
     <div>
@@ -85,6 +111,10 @@ export default function MeasurementsPage() {
 
       {loading ? (
         <p className="text-gray-500">Loading measurements...</p>
+      ) : error ? (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+          {error}
+        </div>
       ) : measurements.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-gray-500 text-lg">No measurements found</p>

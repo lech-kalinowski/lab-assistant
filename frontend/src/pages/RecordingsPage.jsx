@@ -4,6 +4,7 @@ import { getRecordings, deleteRecording } from "../api";
 export default function RecordingsPage({ onViewRecording }) {
   const [recordings, setRecordings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadRecordings();
@@ -11,9 +12,12 @@ export default function RecordingsPage({ onViewRecording }) {
 
   async function loadRecordings() {
     setLoading(true);
+    setError(null);
     try {
       const data = await getRecordings();
       setRecordings(data);
+    } catch (err) {
+      setError(err.message || "Failed to load recordings");
     } finally {
       setLoading(false);
     }
@@ -27,6 +31,14 @@ export default function RecordingsPage({ onViewRecording }) {
 
   if (loading) {
     return <p className="text-gray-500">Loading recordings...</p>;
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+        {error}
+      </div>
+    );
   }
 
   if (recordings.length === 0) {

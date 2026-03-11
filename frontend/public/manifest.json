@@ -1,12 +1,32 @@
 {
   "name": "Lab Assistant",
   "short_name": "Lab Assistant",
-  "description": "Voice-controlled lab measurements recorder for Ray-Ban Meta glasses",
+  "description": "Voice-controlled lab measurements recorder for phones, headsets, and mobile assistants",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
   "orientation": "portrait",
+  "shortcuts": [
+    {
+      "name": "Start Recording",
+      "short_name": "Record",
+      "description": "Open Lab Assistant and begin recording",
+      "url": "/record"
+    },
+    {
+      "name": "Stop Recording",
+      "short_name": "Stop",
+      "description": "Open the stop-signal screen for a hands-free capture session",
+      "url": "/stop"
+    },
+    {
+      "name": "Hands-Free Setup",
+      "short_name": "Setup",
+      "description": "Open assistant and headset setup instructions",
+      "url": "/assistant"
+    }
+  ],
   "icons": [
     {
       "src": "/icons/icon-192.svg",

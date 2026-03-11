@@ -1,18 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useEffectEvent } from "react";
 import { getRecording } from "../api";
 
 export default function RecordingDetail({ id, onBack }) {
   const [recording, setRecording] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadRecording = useEffectEvent(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getRecording(id);
+      setRecording(data);
+    } catch (err) {
+      setError(err.message || "Recording not found");
+    } finally {
+      setLoading(false);
+    }
+  });
 
   useEffect(() => {
-    setLoading(true);
-    getRecording(id)
-      .then(setRecording)
-      .finally(() => setLoading(false));
+    loadRecording();
   }, [id]);
 
   if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
   if (!recording) return <p className="text-red-500">Recording not found</p>;
 
   // Highlight measurements in transcript

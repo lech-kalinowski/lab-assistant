@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <capability
+        android:name="custom.actions.intent.START_RECORDING"
+        app:queryPatterns="@array/assistant_start_recording_queries">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.reybanmetalab.app.MainActivity"
+            android:targetPackage="com.reybanmetalab.app">
+            <extra
+                android:key="voice_route"
+                android:value="/record" />
+        </intent>
+    </capability>
+
+    <capability
+        android:name="custom.actions.intent.STOP_RECORDING"
+        app:queryPatterns="@array/assistant_stop_recording_queries">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.reybanmetalab.app.MainActivity"
+            android:targetPackage="com.reybanmetalab.app">
+            <extra
+                android:key="voice_route"
+                android:value="/stop" />
+        </intent>
+    </capability>
+
+    <capability
+        android:name="custom.actions.intent.OPEN_DASHBOARD"
+        app:queryPatterns="@array/assistant_open_dashboard_queries">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.reybanmetalab.app.MainActivity"
+            android:targetPackage="com.reybanmetalab.app">
+            <extra
+                android:key="voice_route"
+                android:value="/" />
+        </intent>
+    </capability>
+
+    <capability
+        android:name="custom.actions.intent.OPEN_SETUP"
+        app:queryPatterns="@array/assistant_open_setup_queries">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.reybanmetalab.app.MainActivity"
+            android:targetPackage="com.reybanmetalab.app">
+            <extra
+                android:key="voice_route"
+                android:value="/assistant" />
+        </intent>
+    </capability>
+</shortcuts>
