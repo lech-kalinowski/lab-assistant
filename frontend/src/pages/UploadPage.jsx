@@ -44,15 +44,15 @@ function sendStopSignal() {
 
 const HERO_TAGS = [
   "AirPods and Beats",
-  "Galaxy Buds and Samsung",
-  "Ray-Ban Meta and AI wearables",
-  "Siri, Google Assistant, and Bixby",
+  "Galaxy Buds",
+  "Ray-Ban Meta",
+  "Siri, Google Assistant, Bixby",
 ];
 
 const HERO_STATS = [
-  { value: "1 tap", label: "from launch to live recording" },
-  { value: "3 routes", label: "start, stop, and dashboard shortcuts" },
-  { value: "Any mic", label: "upload fallback when recording is blocked" },
+  { value: "Start fast", label: "open directly into recording from a shortcut or wearable flow" },
+  { value: "Structured", label: "transcript, measurements, and history stay in one place" },
+  { value: "Cross-device", label: "works with phone capture and upload fallback when needed" },
 ];
 
 const WORKFLOW_CARDS = [
@@ -289,15 +289,14 @@ export default function UploadPage({ onUploaded }) {
         <div className="relative grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
           <div className="max-w-2xl">
             <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-amber-100">
-              Voice Lab for wearable AI
+              Hands-free lab capture
             </div>
             <h2 className="mt-6 max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Headset-first recording with artwork, motion, and a clearer product story.
+              Capture measurements by voice from glasses, buds, and phone assistants.
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-100/88 sm:text-lg">
-              This homepage now leads with original visual assets for the core use case: capture voice from
-              AirPods, Galaxy Buds, AI glasses, or phone assistants and turn the result into structured lab
-              measurements.
+              Open the app from a wearable shortcut, record instantly, and save transcripts plus extracted
+              values without breaking your workflow at the bench.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -326,28 +325,28 @@ export default function UploadPage({ onUploaded }) {
 
           <div className="grid gap-4">
             <div className="overflow-hidden rounded-[30px] border border-white/10 bg-slate-950/16 p-3 shadow-[0_26px_70px_-42px_rgba(15,23,42,0.92)] backdrop-blur-sm">
-              <img
-                src={voiceLabHero}
-                alt="Abstract generated artwork of smart glasses, sound waves, and audio controls"
-                className="h-full w-full rounded-[24px] object-cover"
-              />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="overflow-hidden rounded-[26px] border border-white/10 bg-slate-950/16 p-3 backdrop-blur-sm">
                 <img
-                  src={assistantOrbit}
-                  alt="Generated microphone and assistant orbit artwork"
-                  className="h-full w-full rounded-[20px] object-cover"
+                  src={voiceLabHero}
+                  alt="Illustration of smart glasses, sound waves, and voice controls"
+                  className="h-full w-full rounded-[24px] object-cover"
                 />
               </div>
-              <div className="overflow-hidden rounded-[26px] border border-white/10 bg-slate-950/16 p-3 backdrop-blur-sm">
-                <img
-                  src={measurementGrid}
-                  alt="Generated dashboard artwork with waveform and measurement panels"
-                  className="h-full w-full rounded-[20px] object-cover"
-                />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="overflow-hidden rounded-[26px] border border-white/10 bg-slate-950/16 p-3 backdrop-blur-sm">
+                  <img
+                    src={assistantOrbit}
+                    alt="Illustration of microphone and assistant activation"
+                    className="h-full w-full rounded-[20px] object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-[26px] border border-white/10 bg-slate-950/16 p-3 backdrop-blur-sm">
+                  <img
+                    src={measurementGrid}
+                    alt="Illustration of measurement dashboard panels"
+                    className="h-full w-full rounded-[20px] object-cover"
+                  />
+                </div>
               </div>
-            </div>
           </div>
         </div>
       </section>
