@@ -4,6 +4,10 @@ Voice-powered measurement tracking for Ray-Ban Meta smart glasses.
 
 Speak your lab measurements hands-free — Lab Assistant transcribes audio with Whisper, automatically extracts numeric values and units, and stores everything in a searchable database.
 
+<p align="center">
+  <img src="docs/repo-homepage-preview.png" alt="Lab Assistant homepage preview with hands-free recording hero and assistant artwork" width="1100" />
+</p>
+
 ## Features
 
 - **Voice Recording** — Record audio directly in the browser or upload audio files (.wav, .mp3, .m4a, .webm, .ogg, .flac)
